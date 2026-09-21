@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 启动页背景：品牌绿渐变 + 居中白色「日历 + 对勾」图标 -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/bg_brand_gradient" />
+    <item
+        android:width="150dp"
+        android:height="150dp"
+        android:drawable="@drawable/ic_brand_mark"
+        android:gravity="center" />
+</layer-list>

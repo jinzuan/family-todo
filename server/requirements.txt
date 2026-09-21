@@ -1,0 +1,5 @@
+# 《待会儿办》M1 服务端依赖（不引大库）
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.5
+python-multipart>=0.0.9

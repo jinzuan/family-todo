@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 品牌渐变：启动页 / 设置页头部栏 / 徽标共用 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:endColor="@color/todo_primary_dark"
+        android:startColor="@color/todo_primary" />
+</shape>

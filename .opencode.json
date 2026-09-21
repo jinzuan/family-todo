@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "opencode-go": {
+      "npm": "@opencode-ai/opencode-go"
+    },
+    "lingll": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "lingll",
+      "options": {
+        "baseURL": "https://api.lingll.icu/v1",
+        "apiKey": "{env:LINGLL_API_KEY}"
+      },
+      "models": {
+        "glm-5.2": {
+          "name": "glm-5.2 (lingll 强前端)"
+        }
+      }
+    }
+  },
+  "model": "opencode-go/deepseek-v4.1-flash"
+}

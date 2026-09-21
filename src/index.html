@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover">
+<title>待会儿办</title>
+<link rel="stylesheet" href="styles.css?v=20260914p">
+</head>
+<body>
+<header class="topbar">
+  <!-- 设置放左侧，避免挡住接收端右下角的 + 加号 -->
+  <button id="settingsBtn" class="icon-btn gear" type="button" aria-label="设置" title="设置">⚙</button>
+  <div class="brand" id="brand">待会儿办</div>
+  <nav class="tabs">
+    <button id="tabPublish" class="tab">发布</button>
+    <button id="tabExecute" class="tab">执行</button>
+  </nav>
+  <div class="tools">
+    <span class="conn" id="conn">未连接</span>
+  </div>
+</header>
+<div class="metabar"><span class="meta" id="meta"></span></div>
+
+<main>
+  <section id="joinView" class="view join-view hidden">
+    <div class="card">
+      <h2>加入家庭</h2>
+      <p class="hint">用家庭令牌加入。令牌只在服务端存哈希，设备令牌保存在本机浏览器。</p>
+      <label>服务器地址
+        <input id="joinApi" type="url" placeholder="http://localhost:8000">
+      </label>
+      <label>家庭令牌
+        <input id="joinToken" type="text" autocomplete="off" placeholder="家庭入内令牌">
+      </label>
+      <label>设备名称
+        <input id="joinDevice" type="text" placeholder="如：发布端手机">
+      </label>
+      <label>角色
+        <select id="joinRole">
+          <option value="executor" selected>执行端</option>
+          <option value="publisher">发布端</option>
+        </select>
+      </label>
+      <button id="joinBtn" class="primary block">加入</button>
+      <div class="error" id="joinError"></div>
+    </div>
+  </section>
+
+  <div id="appViews" class="hidden">
+
+    <section id="publishView" class="view">
+      <div class="card compose-card">
+        <h3 class="card-title">📋 一句话发布</h3>
+        <textarea id="parseText" rows="4" placeholder="粘贴一段中文，例如：给你姥买葱花饼15元，娃娃菜，青椒3个&#10;回来取快递"></textarea>
+        <div class="row">
+          <button id="parseBtn" class="primary">生成列表</button>
+          <button id="clearParseBtn" class="ghost">清空</button>
+          <span class="hint" id="parseHint"></span>
+        </div>
+        <div class="card-title quick-date-title">📅 发布到 <span class="hint">默认今天；句中有「今天/明天/15号」的按句归日，选下面可整体覆盖</span></div>
+        <div class="seg" id="pubDateSeg">
+          <button type="button" class="chip active" data-mode="today">今天</button>
+          <button type="button" class="chip" data-mode="tomorrow">明天</button>
+          <button type="button" class="chip" data-mode="custom">选某天</button>
+          <button type="button" class="chip" data-mode="range">起止区间</button>
+          <button type="button" class="chip" data-mode="persistent">持久</button>
+        </div>
+        <div class="date-inputs">
+          <!-- 原生 date 保留为隐藏兜底（值契约不变），可见交互由自绘迷你月历承担 -->
+          <input id="pubDateCustom" type="date" class="native-date">
+          <button id="pubDateBtn" class="date-pick-btn hidden" type="button">📅 今天</button>
+          <div id="pubCalendar" class="mini-cal hidden" role="dialog" aria-label="选择发布日期"></div>
+          <div id="pubRangeWrap" class="range-inputs hidden">
+            <input id="pubStart" type="date">
+            <span class="hint">至</span>
+            <input id="pubEnd" type="date">
+          </div>
+          <p class="hint hidden" id="pubPersistHint">持久待办：无日期，做完才勾，一直显示。</p>
+        </div>
+      </div>
+
+      <div class="card hidden" id="previewCard">
+        <h3 class="card-title">拆分预览 <span class="hint">可编辑 / 可删错 / 点条目展开详细设置</span></h3>
+        <div id="previewList" class="preview-list"></div>
+        <button id="publishBtn" class="primary block">确认发布</button>
+      </div>
+
+      <div class="card hidden" id="notesCard">
+        <h3 class="card-title">📝 未成条 <span class="hint">不建任务</span></h3>
+        <ul id="notesList" class="notes"></ul>
+      </div>
+
+      <div class="card hidden" id="publishedCard">
+        <h3 class="card-title">📤 发布管理 <span class="hint">今天 + 未来按日期分组；可直接改 / 完成 / 知悉 / 撤回</span></h3>
+        <div id="publishedList" class="published-list"></div>
+        <p id="publishedEmpty" class="hint">还没有发布记录</p>
+        <div id="editBatchBar" class="edit-batch-bar hidden">
+          <span id="editBatchCount" class="hint">已选 0 条</span>
+          <div class="edit-batch-row">
+            <input id="editBatchDate" type="date" aria-label="统一日期">
+            <button id="editBatchDateBtn" class="ghost small" type="button">统一设为该日</button>
+          </div>
+          <div class="edit-batch-row">
+            <input id="editBatchTag" type="text" placeholder="统一标签（留空=清除）">
+            <button id="editBatchTagBtn" class="ghost small" type="button">统一标签</button>
+          </div>
+          <button id="editBatchClearBtn" class="ghost small" type="button">清空选择</button>
+        </div>
+      </div>
+
+      <button id="advancedToggle" class="advanced-toggle" type="button">
+        <span class="adv-caret">＋</span> 高级
+      </button>
+      <div id="advancedBlock" class="advanced hidden">
+        <div class="card">
+          <h3 class="card-title">列表式批量 <span class="hint">每条一行，可勾选一次添加多条；点条目展开详细设置</span></h3>
+          <textarea id="batchText" rows="4" placeholder="青椒三个&#10;葱花饼十五元&#10;回来取快递"></textarea>
+          <div class="row">
+            <button id="batchGenBtn" class="primary">生成清单</button>
+            <button id="batchAllBtn" class="ghost">全选 / 全不选</button>
+            <button id="batchAddBtn" class="primary">添加勾选</button>
+          </div>
+          <div id="batchList" class="batch-list"></div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">逐条录入</h3>
+          <div class="manual-grid">
+            <input id="mTitle" class="span2" placeholder="标题（必填）">
+            <input id="mQty" type="number" step="any" placeholder="数量">
+            <input id="mUnit" placeholder="单位">
+            <input id="mPrice" type="number" step="any" placeholder="金额">
+            <select id="mCategory">
+              <option value="other">其他</option>
+              <option value="shopping">购物</option>
+              <option value="errand">事务</option>
+            </select>
+            <label class="important-toggle span2">
+              <input id="mImportant" type="checkbox"> 标为重要（置顶）
+            </label>
+            <button id="manualAddBtn" class="primary">添加</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="executeView" class="view hidden">
+      <div class="exec-head">
+        <div class="date-nav">
+          <button id="prevDay" class="icon-btn" type="button" aria-label="前一天">‹</button>
+          <button id="dateLabel" class="date-label" type="button">今天</button>
+          <button id="nextDay" class="icon-btn" type="button" aria-label="后一天">›</button>
+          <input id="execDatePicker" type="date" class="native-date">
+        </div>
+        <button id="dateFilterBtn" class="icon-btn filter" type="button" aria-label="筛选">▾</button>
+      </div>
+
+      <!-- 自绘迷你月历：今天/未来有未完成待办的日子右上角红点 -->
+      <div id="execCalendar" class="mini-cal hidden" role="dialog" aria-label="选择日期"></div>
+
+      <!-- 执行端信息反馈：已知悉按钮独立常显（不藏在下拉里） -->
+      <div class="ack-bar" id="execAckBar" hidden>
+        <button id="ackAllBtn" type="button" class="chip ack">全部知悉</button>
+        <button id="ackSelBtn" type="button" class="chip ack sel" hidden>多选知悉(0)</button>
+      </div>
+
+      <div id="datePanel" class="panel hidden">
+        <div class="seg filter-chips" id="viewModeChips">
+          <button type="button" class="chip active" data-mode="today">今天</button>
+          <button type="button" class="chip" data-mode="future">未来</button>
+          <button type="button" class="chip" data-mode="overdue">已过期</button>
+          <button type="button" class="chip" data-mode="done">已完成</button>
+          <button type="button" class="chip" data-mode="all">全部</button>
+        </div>
+      </div>
+
+      <div id="quickAddPanel" class="panel hidden">
+        <div class="quick-add">
+          <input id="execTitle" class="span2" placeholder="添加待办…">
+          <input id="execQty" type="number" step="any" placeholder="数量">
+          <input id="execUnit" placeholder="单位">
+          <input id="execPrice" type="number" step="any" placeholder="金额">
+          <button id="execAddBtn" class="primary">添加</button>
+        </div>
+      </div>
+
+      <div id="persistentBlock" class="persistent-block hidden">
+        <button id="persistentToggle" class="section-toggle" type="button">
+          <span>📌 持久待办</span>
+          <span class="section-count" id="persistentCount">0</span>
+          <span class="caret" id="persistentCaret">▾</span>
+        </button>
+        <div id="persistentList" class="todo-list hidden"></div>
+      </div>
+
+      <div id="todoList" class="todo-list"></div>
+      <p id="emptyHint" class="hint hidden">暂无待办</p>
+
+      <div id="quickMenu" class="quick-menu hidden">
+        <button class="quick-item" data-action="add" type="button"><span class="qi-icon">＋</span>添加待办</button>
+      </div>
+      <button id="fabBtn" class="fab" type="button" aria-label="添加待办">＋</button>
+    </section>
+  </div>
+</main>
+
+<div id="settingsPanel" class="modal hidden">
+  <div class="modal-box">
+    <h3>设置</h3>
+    <label class="settings-label">本机标识名
+      <span class="settings-inline">
+        <input id="settingsDeviceName" type="text" maxlength="30" placeholder="如：妈妈的手机">
+        <button id="settingsNameSave" class="ghost small" type="button">保存</button>
+      </span>
+    </label>
+    <label class="settings-label">打开 App 默认进入
+      <select id="defaultView">
+        <option value="">跟随角色</option>
+        <option value="publish">发布端</option>
+        <option value="execute">接收端</option>
+      </select>
+    </label>
+    <div class="settings-row">
+      <button id="refreshBtn" class="ghost small" type="button">↻ 刷新</button>
+      <button id="logoutBtn" class="ghost small hidden" type="button">退出登录</button>
+    </div>
+    <div class="modal-actions">
+      <button id="settingsCloseBtn" class="ghost" type="button">关闭</button>
+    </div>
+  </div>
+</div>
+
+<div id="decisionModal" class="modal hidden">
+  <div class="modal-box">
+    <h3>这条待办还有未处理的子项</h3>
+    <p id="decisionText" class="hint"></p>
+    <div class="modal-actions">
+      <button data-decision="complete" class="primary">全部完成</button>
+      <button data-decision="ignore_rest" class="ghost">未勾忽略</button>
+      <button data-decision="cancel" class="ghost">取消</button>
+    </div>
+  </div>
+</div>
+
+<div id="settleModal" class="modal hidden">
+  <div class="modal-box">
+    <h3>本轮待办已结束 🎉</h3>
+    <p class="hint">本次完成了：</p>
+    <ul id="settleList" class="settle-list"></ul>
+    <p class="hint" id="settleTime"></p>
+    <div class="modal-actions">
+      <button id="settleClearBtn" class="primary">确认，回到无任务</button>
+      <button id="settleCloseBtn" class="ghost">稍后</button>
+    </div>
+  </div>
+</div>
+
+<div id="nameModal" class="modal hidden">
+  <div class="modal-box">
+    <h3>给这台设备起个名</h3>
+    <p class="hint">家人会看到这个标识，如「妈妈的手机」「我的手机」；之后可在设置里随时修改。</p>
+    <input id="nameModalInput" type="text" maxlength="30" placeholder="如：妈妈的手机">
+    <div class="modal-actions">
+      <button id="nameModalSave" class="primary">保存</button>
+      <button id="nameModalSkip" class="ghost">以后再说</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="app.js?v=20260914p"></script>
+</body>
+</html>

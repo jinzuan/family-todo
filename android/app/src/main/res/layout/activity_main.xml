@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 主界面：全屏 WebView + 顶部加载进度条 + 左下角设置按钮（放左侧，避免挡住网页右下角的 + 加号） -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/settings_screen_bg">
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/settings_screen_bg" />
+
+    <!-- 页面加载进度：加载中显示，加载完自动隐藏 -->
+    <ProgressBar
+        android:id="@+id/web_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_gravity="top"
+        android:indeterminate="false"
+        android:max="100"
+        android:progressTint="@color/todo_primary"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/btn_settings"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="18dp"
+        android:background="@drawable/bg_round_button"
+        android:contentDescription="@string/settings"
+        android:elevation="8dp"
+        android:padding="14dp"
+        android:src="@drawable/ic_settings"
+        android:tint="@color/todo_primary" />
+</FrameLayout>

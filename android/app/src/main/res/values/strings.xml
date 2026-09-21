@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">待会儿办</string>
+    <string name="settings">设置</string>
+
+    <!-- 设置页 -->
+    <string name="settings_title">设置 / 加入家庭</string>
+    <string name="action_back">返回</string>
+    <string name="settings_server_section">服务器</string>
+    <string name="settings_join_section">加入家庭</string>
+    <string name="settings_web_url">网页地址（WebView 加载）</string>
+    <string name="settings_api_base">接口地址</string>
+    <string name="settings_family_token">家庭令牌</string>
+    <string name="settings_device_name">设备名称</string>
+    <string name="settings_role">角色</string>
+    <string name="hint_web_url">如 http://192.168.1.10:5173/</string>
+    <string name="hint_api_base">如 http://192.168.1.10:8000</string>
+    <string name="hint_family_token">粘贴家庭入内令牌</string>
+    <string name="hint_device_name">如：接收端手机</string>
+    <string name="action_join">加入家庭</string>
+    <string name="action_save">保存地址</string>
+    <string name="action_logout">退出本机设备</string>
+    <string name="settings_tip">提示：令牌只在服务端存哈希；加入后设备令牌保存在本机，网页与桌面小组件共用。</string>
+
+    <!-- 关于 / 版本（设置页底部）：about_app_name / about_version 作字段标签，值由 SettingsActivity 填充 -->
+    <string name="settings_about_section">关于</string>
+    <string name="settings_about_tagline">家庭待办 · 轻轻提醒</string>
+    <string name="about_app_name">应用名称</string>
+    <string name="about_version">版本号</string>
+    <string name="about_version_value">v%1$s · build %2$d</string>
+    <string name="settings_about_credits_title">制作者</string>
+    <string name="about_credits">苏达(智能体)·大肥鱼(DeepSeek Harness)·金钻(出品)</string>
+    <string name="about_credits_note">感谢各位协作者</string>
+    <string name="settings_about_license_title">开源许可</string>
+    <string name="about_license">MIT 协议</string>
+
+    <!-- 小组件 -->
+    <string name="widget_title">待会儿办</string>
+    <string name="widget_refresh">刷新</string>
+    <string name="widget_empty">暂无待办（点右上角刷新）</string>
+    <string name="widget_desc">待办清单：3×2 默认尺寸，可拖拽缩放</string>
+    <string name="widget_desc_wide">待办清单：4×2 宽版，展示更多条目</string>
+    <string name="widget_desc_small">待办清单：2×2 紧凑版，只看最近待办</string>
+</resources>

@@ -1,0 +1,15 @@
+[Unit]
+Description=待会儿办 family-todo FastAPI 同源托管
+After=network.target
+
+[Service]
+# 路径为示例，请按自己的部署位置修改（本服务同源托管网页+接口）
+Type=simple
+WorkingDirectory=/srv/family-todo/server
+Environment=DB_PATH=/srv/family-todo/server/data/family_todo.db
+ExecStart=/srv/family-todo/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

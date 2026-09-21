@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12+ 系统启动页：与自定义 windowBackground 保持一致的品牌绿 + 图标 -->
+<resources>
+    <style name="Theme.FamilyTodo.Splash" parent="Theme.FamilyTodo">
+        <item name="android:windowSplashScreenBackground">@color/todo_primary</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_brand_mark</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/todo_primary</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+</resources>

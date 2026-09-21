@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 应用主题：无 ActionBar，设置页用自绘的绿色头部栏 -->
+    <style name="Theme.FamilyTodo" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/todo_primary</item>
+        <item name="colorPrimaryDark">@color/todo_primary_dark</item>
+        <item name="colorAccent">@color/todo_accent</item>
+        <item name="android:colorBackground">@color/settings_screen_bg</item>
+        <item name="android:windowBackground">@color/settings_screen_bg</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/todo_primary</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">@color/settings_screen_bg</item>
+    </style>
+
+    <!-- 启动主题：仅挂在 MainActivity 上，冷启动先显示品牌绿 + 图标，避免白屏闪一下 -->
+    <style name="Theme.FamilyTodo.Splash" parent="Theme.FamilyTodo">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+</resources>

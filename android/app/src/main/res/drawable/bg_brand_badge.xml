@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 「关于」区品牌徽标底：绿色圆形渐变 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:angle="315"
+        android:endColor="@color/todo_primary_dark"
+        android:startColor="#3FB964" />
+</shape>

@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.familytodo.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.familytodo.app"
+        minSdk 26
+        targetSdk 34
+        versionCode 7
+        versionName "0.5.4"
+    }
+
+    // App 自更新检查需要 BuildConfig.VERSION_CODE（AGP 8 默认不生成）
+    buildFeatures {
+        buildConfig true
+    }
+
+    buildTypes {
+        release {
+            // 壳很薄，保持不混淆，方便排查；如需可自行开启
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+    // 依赖刻意保持最少：AppCompat（界面）+ core-ktx + WorkManager（小组件定时刷新）
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.work:work-runtime-ktx:2.9.0'
+}

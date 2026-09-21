@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 深色主题：只覆盖设置页语义色；小组件固定浅色不受影响。 -->
+<resources>
+    <color name="todo_primary_soft">#1F2E20</color>
+
+    <color name="settings_screen_bg">#111111</color>
+    <color name="settings_surface">#1E1E1E</color>
+    <color name="settings_surface_stroke">#2C332C</color>
+    <color name="settings_text_primary">#ECECEC</color>
+    <color name="settings_text_secondary">#9AA39C</color>
+    <color name="settings_divider">#2A2F2A</color>
+    <color name="settings_input_bg">#242424</color>
+    <color name="settings_input_bg_focus">#2B2F2B</color>
+    <color name="settings_input_stroke">#3A423A</color>
+    <color name="settings_outline">#3A423A</color>
+    <color name="settings_ripple">#22FFFFFF</color>
+    <color name="settings_danger">#EF6D6D</color>
+</resources>

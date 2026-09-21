@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  自适应图标前景：白色日历卡片 + 绿色头部 + 绿色对勾（位于安全区内）。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 白色卡片 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M39,30 h30 a7,7 0 0 1 7,7 v34 a7,7 0 0 1 -7,7 h-30 a7,7 0 0 1 -7,-7 v-34 a7,7 0 0 1 7,-7 z" />
+
+    <!-- 卡片顶部绿色头部（圆角只保留上两角） -->
+    <path
+        android:fillColor="#2E9E4F"
+        android:pathData="M39,30 h30 a7,7 0 0 1 7,7 v8 h-44 v-8 a7,7 0 0 1 7,-7 z" />
+
+    <!-- 两个挂环 -->
+    <path
+        android:pathData="M43,25 L43,34"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="5"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M65,25 L65,34"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="5"
+        android:strokeLineCap="round" />
+
+    <!-- 对勾 -->
+    <path
+        android:pathData="M41,62 l6,6 l15,-17"
+        android:strokeColor="#2E9E4F"
+        android:strokeWidth="6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

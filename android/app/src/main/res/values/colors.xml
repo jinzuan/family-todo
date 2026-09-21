@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  配色：与网页端 primary 绿色系保持同一家族，原生控件上略微加深以保证白字对比度。
+  分为两套：
+   1) 品牌/小组件色：小组件背景恒为白色，不跟随深浅色，所以单独一组固定浅色；
+   2) 设置页语义色：带 values-night 覆盖，深浅色主题都清晰。
+-->
+<resources>
+    <!-- 品牌主色 -->
+    <color name="todo_primary">#2E9E4F</color>
+    <color name="todo_primary_dark">#1E7A3C</color>
+    <color name="todo_primary_soft">#EAF6EC</color>
+    <color name="todo_accent">#F5A623</color>
+
+    <!-- 桌面小组件专用（背景固定白色，不随深色模式变化） -->
+    <color name="widget_text_primary">#212121</color>
+    <color name="widget_text_secondary">#757575</color>
+
+    <color name="ic_launcher_background">#2E9E4F</color>
+    <color name="item_pressed">#1A2E9E4F</color>
+
+    <!-- 设置页语义色（浅色） -->
+    <color name="settings_screen_bg">#F6F8F4</color>
+    <color name="settings_surface">#FFFFFF</color>
+    <color name="settings_surface_stroke">#E7ECE7</color>
+    <color name="settings_text_primary">#1C1C1E</color>
+    <color name="settings_text_secondary">#6E7A70</color>
+    <color name="settings_divider">#ECEEE9</color>
+    <color name="settings_input_bg">#FFFFFF</color>
+    <color name="settings_input_bg_focus">#FFFFFF</color>
+    <color name="settings_input_stroke">#DCE3DC</color>
+    <color name="settings_outline">#D3DBD3</color>
+    <color name="settings_ripple">#142E9E4F</color>
+    <color name="settings_danger">#C94A4A</color>
+
+    <color name="white">#FFFFFF</color>
+</resources>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  设置 / 加入家庭。
+  顶部是自绘的绿色头部栏（因为主题是 NoActionBar，系统 ActionBar 不显示），
+  下方滚动区每个功能区一张大圆角卡片；「关于」区用品牌徽标 + 版本胶囊 + 标签/值两列。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/settings_screen_bg"
+    android:orientation="vertical">
+
+    <!-- ==================== 顶部头部栏 ==================== -->
+    <LinearLayout style="@style/SettingsAppBar">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            style="@style/SettingsBackButton" />
+
+        <TextView
+            style="@style/SettingsAppBarTitle"
+            android:text="@string/settings_title" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="28dp">
+
+            <!-- ==================== 服务器 ==================== -->
+            <LinearLayout style="@style/SettingsCard">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View style="@style/SettingsSectionBar" />
+
+                    <TextView
+                        style="@style/SettingsSectionTitle"
+                        android:text="@string/settings_server_section" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:text="@string/settings_web_url" />
+
+                <EditText
+                    android:id="@+id/input_web_url"
+                    style="@style/SettingsInput"
+                    android:hint="@string/hint_web_url"
+                    android:inputType="textUri" />
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/settings_api_base" />
+
+                <EditText
+                    android:id="@+id/input_api_base"
+                    style="@style/SettingsInput"
+                    android:hint="@string/hint_api_base"
+                    android:inputType="textUri" />
+            </LinearLayout>
+
+            <!-- ==================== 加入家庭 ==================== -->
+            <LinearLayout style="@style/SettingsCard">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View style="@style/SettingsSectionBar" />
+
+                    <TextView
+                        style="@style/SettingsSectionTitle"
+                        android:text="@string/settings_join_section" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:text="@string/settings_family_token" />
+
+                <EditText
+                    android:id="@+id/input_family_token"
+                    style="@style/SettingsInput"
+                    android:hint="@string/hint_family_token"
+                    android:inputType="text" />
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/settings_device_name" />
+
+                <EditText
+                    android:id="@+id/input_device_name"
+                    style="@style/SettingsInput"
+                    android:hint="@string/hint_device_name"
+                    android:inputType="text" />
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/settings_role" />
+
+                <Spinner
+                    android:id="@+id/spinner_role"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp" />
+
+                <Button
+                    android:id="@+id/btn_join"
+                    style="@style/SettingsButtonPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/action_join" />
+
+                <TextView
+                    style="@style/SettingsHint"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/settings_tip" />
+            </LinearLayout>
+
+            <!-- ==================== 保存 / 退出 ==================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_save"
+                    style="@style/SettingsButtonPrimary"
+                    android:layout_width="0dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:text="@string/action_save" />
+
+                <Button
+                    android:id="@+id/btn_logout"
+                    style="@style/SettingsButtonOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/action_logout"
+                    android:textColor="@color/settings_danger" />
+            </LinearLayout>
+
+            <!-- ============ 关于 / 版本 / 制作者 / 开源许可 ============ -->
+            <LinearLayout style="@style/SettingsCard">
+
+                <!-- 品牌行：圆形徽标 + 应用名 + 说明 + 版本胶囊 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:background="@drawable/bg_brand_badge"
+                        android:contentDescription="@string/app_name"
+                        android:padding="13dp"
+                        android:src="@drawable/ic_brand_mark" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/text_about_app_name"
+                            style="@style/SettingsBrandName" />
+
+                        <TextView
+                            style="@style/SettingsHint"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/settings_about_tagline" />
+
+                        <TextView
+                            android:id="@+id/text_about_version"
+                            style="@style/SettingsChip"
+                            android:layout_marginTop="8dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View style="@style/SettingsDivider" />
+
+                <!-- 制作者 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SettingsFieldLabel"
+                        android:text="@string/settings_about_credits_title" />
+
+                    <TextView
+                        android:id="@+id/text_about_credits"
+                        style="@style/SettingsFieldValue" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/text_about_credits_note"
+                    style="@style/SettingsHint"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="72dp" />
+
+                <View style="@style/SettingsDivider" />
+
+                <!-- 开源许可 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SettingsFieldLabel"
+                        android:text="@string/settings_about_license_title" />
+
+                    <TextView
+                        android:id="@+id/text_about_license"
+                        style="@style/SettingsFieldValue" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
