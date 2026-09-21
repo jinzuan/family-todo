@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover">
 <title>待会儿办</title>
-<link rel="stylesheet" href="styles.css?v=20260914p">
+<link rel="stylesheet" href="styles.css?v=20260921a">
 </head>
 <body>
 <header class="topbar">
@@ -222,10 +222,38 @@
     </label>
     <div class="settings-row">
       <button id="refreshBtn" class="ghost small" type="button">↻ 刷新</button>
+      <button id="aboutBtn" class="ghost small" type="button">关于</button>
       <button id="logoutBtn" class="ghost small hidden" type="button">退出登录</button>
     </div>
     <div class="modal-actions">
       <button id="settingsCloseBtn" class="ghost" type="button">关闭</button>
+    </div>
+  </div>
+</div>
+
+<div id="aboutPanel" class="modal hidden">
+  <div class="modal-box">
+    <h3>待会儿办</h3>
+    <p class="hint">一个面向家庭的轻量待办工具。</p>
+    <p class="hint" style="margin-top:8px;line-height:1.7">
+      <b>发布端</b>用一句话或逐条发布待办，<b>接收端</b>在手机小组件上点一下就能勾掉。<br>
+      界面与逻辑走服务器网页，改完即时生效；数据留在自己的服务器上，
+      凭一条入内链接加入，零注册。
+    </p>
+    <p class="hint" style="margin-top:10px">
+      本机标识：<span id="aboutDevice">—</span><br>
+      版本：<span id="aboutVersion">—</span>
+    </p>
+    <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line, #e5e5e5)">
+      <p class="hint" style="margin-bottom:6px">开源地址</p>
+      <a id="repoLink"
+         href="https://github.com/jinzuan/family-todo"
+         target="_blank" rel="noopener noreferrer"
+         style="font-size:13px;word-break:break-all">github.com/jinzuan/family-todo</a>
+      <p class="hint" style="margin-top:6px">MIT 协议 · 欢迎参考与改进</p>
+    </div>
+    <div class="modal-actions">
+      <button id="aboutCloseBtn" class="ghost" type="button">关闭</button>
     </div>
   </div>
 </div>
@@ -268,6 +296,6 @@
 </div>
 
 <div id="toast" class="toast hidden"></div>
-<script src="app.js?v=20260914p"></script>
+<script src="app.js?v=20260921a"></script>
 </body>
 </html>

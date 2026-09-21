@@ -2502,6 +2502,34 @@
     if (e.target === $("settingsPanel")) toggleSettings(false);
   });
 
+  // 关于 / 开源入口（点「关于」→ 介绍 + 开源链接）
+  $("aboutBtn").addEventListener("click", function () {
+    const dn = localStorage.getItem(KEYS.deviceName);
+    if ($("aboutDevice")) $("aboutDevice").textContent = dn || "未设置";
+    if ($("aboutVersion")) $("aboutVersion").textContent = "—";
+    toggleSettings(false);
+    $("aboutPanel").classList.remove("hidden");
+    // 顺手取一下版本号（取不到就保持 —）
+    try {
+      const base = (localStorage.getItem(KEYS.api) || "").replace(/\/+$/, "");
+      fetch(base + "/api/app/latest.json", { cache: "no-store" })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) {
+          if (j && $("aboutVersion")) {
+            $("aboutVersion").textContent =
+              (j.version_name || j.versionName || "—") + (j.version_code ? " (" + (j.version_code || j.versionCode) + ")" : "");
+          }
+        })
+        .catch(function () {});
+    } catch (e) {}
+  });
+  $("aboutCloseBtn").addEventListener("click", function () {
+    $("aboutPanel").classList.add("hidden");
+  });
+  $("aboutPanel").addEventListener("click", function (e) {
+    if (e.target === $("aboutPanel")) $("aboutPanel").classList.add("hidden");
+  });
+
   // 默认视图设置：打开 App 时进入发布端 / 接收端（跟随角色为空）
   $("defaultView").value = localStorage.getItem(KEYS.defaultView) || "";
   $("defaultView").addEventListener("change", function (e) {
